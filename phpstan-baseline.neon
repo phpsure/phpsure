@@ -1,0 +1,26 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Method PHPSure\\\\Tests\\\\Functional\\\\Fixtures\\\\BadType\\:\\:returnsIntButReturnsString\\(\\) should return int but returns string\\.$#"
+			count: 1
+			path: tests/Functional/Fixtures/BadTypeDir/BadType.php
+
+		-
+			message: "#^Method PHPSure\\\\Tests\\\\Functional\\\\Fixtures\\\\BadType\\:\\:returnsStringButReturnsInt\\(\\) should return string but returns int\\.$#"
+			count: 1
+			path: tests/Functional/Fixtures/BadTypeDir/BadType.php
+
+		-
+			message: "#^Method PHPSure\\\\Tests\\\\Functional\\\\Fixtures\\\\BadTypeDir\\\\BadTypeNonStrict\\:\\:returnsStringButReturnsInt\\(\\) should return string but returns int\\.$#"
+			count: 1
+			path: tests/Functional/Fixtures/BadTypeDir/BadTypeNonStrict.php
+
+		-
+			message: "#^Method PHPSure\\\\Tests\\\\Unit\\\\Fixtures\\\\ScannerTestFixtureClass\\:\\:privateInstanceMethod\\(\\) is unused\\.$#"
+			count: 1
+			path: tests/Unit/Fixtures/ScannerTestFixtureClass.php
+
+		-
+			message: "#^Static method PHPSure\\\\Tests\\\\Unit\\\\Fixtures\\\\ScannerTestFixtureClass\\:\\:privateStaticMethod\\(\\) is unused\\.$#"
+			count: 1
+			path: tests/Unit/Fixtures/ScannerTestFixtureClass.php

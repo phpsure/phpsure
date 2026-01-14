@@ -1,0 +1,38 @@
+#!/usr/bin/env php
+<?php
+
+/*
+ * PHPSure
+ * Copyright (c) Dan Phillimore (asmblah)
+ * https://github.com/phpsure/phpsure/
+ *
+ * Released under the MIT license.
+ * https://github.com/phpsure/phpsure/raw/main/MIT-LICENSE.txt
+ */
+
+declare(strict_types=1);
+
+use Composer\Autoload\ClassLoader;
+use PHPSure\Config\ConfigResolver;
+use PHPSure\Config\ProjectRootResolver;
+use PHPSure\Exception\ConfigurationExceptionInterface;
+
+require_once $_composer_autoload_path ?? __DIR__ . '/../vendor/autoload.php';
+
+$argv = $_SERVER['argv'];
+
+$projectRootResolver = new ProjectRootResolver(new ReflectionClass(ClassLoader::class));
+$configResolver = new ConfigResolver($projectRootResolver->resolveProjectRoot());
+
+try {
+    $config = $configResolver->resolveConfig();
+} catch (ConfigurationExceptionInterface $exception) {
+    fwrite(STDERR, $exception->getMessage() . '.' . PHP_EOL);
+
+    exit(1);
+}
+
+$phpSureBinary = $config->getImplementation()
+    ->getPhpSureBinary();
+
+exit($phpSureBinary->run($argv));
